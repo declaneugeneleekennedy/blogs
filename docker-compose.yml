@@ -1,0 +1,17 @@
+version: '3'
+services:
+  blogs:
+    build:
+      context: .
+    depends_on:
+      - redis
+    entrypoint: "tail -f /dev/null"
+    working_dir: /usr/src/blogs
+    volumes:
+      - .:/usr/src/blogs
+  redis:
+    image: redis:4.0.0-alpine
+    ports:
+      - "6379:6379"
+    volumes:
+      - redis:/var/lib/redis/data
